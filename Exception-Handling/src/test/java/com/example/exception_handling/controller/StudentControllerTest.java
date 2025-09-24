@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-//import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
@@ -39,7 +39,7 @@ class StudentControllerTest {
     }
 
     @Test
-   // @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = "ADMIN")
     void testAddStudent() throws Exception {
         when(studentServiceImpl.addStudent(any(Student.class))).thenReturn(student);
         mockMvc.perform(post("/student/addStudent")
@@ -50,7 +50,7 @@ class StudentControllerTest {
     }
 
     @Test
-   // @WithMockUser(roles = {"ADMIN", "USER"})
+    @WithMockUser(roles = {"ADMIN", "USER"})
     void testGetStudentById() throws Exception {
         when(studentServiceImpl.getStudentById(1L)).thenReturn(student);
         mockMvc.perform(get("/student/getStudentById/1"))
@@ -59,7 +59,7 @@ class StudentControllerTest {
     }
 
     @Test
-   // @WithMockUser(roles = {"ADMIN", "USER"})
+    @WithMockUser(roles = {"ADMIN", "USER"})
     void testGetAllStudent() throws Exception {
         List<Student> students = Arrays.asList(student);
         when(studentServiceImpl.getAllStudent()).thenReturn(students);
@@ -69,7 +69,7 @@ class StudentControllerTest {
     }
 
     @Test
-   // @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = "ADMIN")
     void testUpdateStudent() throws Exception {
         when(studentServiceImpl.updatestd(eq(1L), any(Student.class))).thenReturn(student);
         mockMvc.perform(put("/student/updateStudent/1")
@@ -80,7 +80,7 @@ class StudentControllerTest {
     }
 
     @Test
-   // @WithMockUser(roles = {"ADMIN", "MANAGER"})
+   @WithMockUser(roles = {"ADMIN", "MANAGER"})
     void testUpdateStudentPartial() throws Exception {
         when(studentServiceImpl.updatestdpartially(eq(1L), any(Student.class))).thenReturn(student);
         mockMvc.perform(patch("/student/updateStudentpartial/1")
