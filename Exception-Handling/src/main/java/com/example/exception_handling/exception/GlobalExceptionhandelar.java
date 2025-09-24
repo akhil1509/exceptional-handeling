@@ -13,13 +13,16 @@ public class GlobalExceptionhandelar {
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<Map<String, Object>> handelExceptionOnGlobal(ResourceNotFoundException ex){
-		
+
 		Map map = new HashMap();
 		map.put("message", ex.getMessage());
 		map.put("success", false);
 		map.put("status",HttpStatus.NOT_FOUND );
-		
+
 		return new ResponseEntity<>(map, HttpStatus.OK);
+	
+
+		
 		
 	}
 

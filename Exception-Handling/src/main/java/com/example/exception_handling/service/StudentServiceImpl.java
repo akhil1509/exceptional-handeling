@@ -36,6 +36,35 @@ public class StudentServiceImpl implements StudentService {
 		
 		return studentRepository.findAll();
 	}
-	
+
+	@Override
+	public Student updatestd(Long id, Student student) {
+		Student student2 = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("\"student not found at id: \"+id"));
+		student2.setName(student.getName());
+		student2.setEmail(student.getEmail());
+		Student student3 = studentRepository.save(student2);
+		return student3;
+	}
+
+	@Override
+	public Student updatestdpartially(Long id, Student student) {
+		// TODO Auto-generated method stub
+		Student student2 = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("\"student not found at id: \"+id"));
+         if(student.getName()!=null) {
+        	 student2.setName(student.getName());
+         }if(student.getEmail()!=null) {
+        	 student2.setEmail(student.getEmail());
+         }
+         Student student3 = studentRepository.save(student2);
+ 		return student3;
+	}
+
+	@Override
+	public String deleteStd(Long id) {
+		studentRepository.deleteById(id);
+
+		return "record is deleted successfully!";
+	}
+
 
 }
